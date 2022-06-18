@@ -75,6 +75,7 @@
 
 <script>
 import Header from "./components/Header.vue";
+
 export default {
   /* eslint-disable */
   // eslint-disable-next-line
@@ -94,6 +95,8 @@ export default {
     currentPage: 1,
     perPage: 5,
     page: 1,
+    pageList: [],
+    isFilter: false,
   }),
   methods: {
     go() {
@@ -103,6 +106,7 @@ export default {
       this.$store.commit("setSearchString", this.searchString);
     },
     order(value) {
+      let list = this.$store.getters.getFilteredList;
       const sort_by = (field, reverse, primer) => {
         const key = primer
           ? function (x) {
@@ -118,25 +122,21 @@ export default {
           return (a = key(a)), (b = key(b)), reverse * ((a > b) - (b > a));
         };
       };
-
       switch (value) {
         case 0:
-          this.getPost.sort(sort_by("name", false, (a) => a.toUpperCase()));
+          list.sort(sort_by("name", false, (list) => list.toUpperCase()));
           break;
         case 1:
-          this.getPost
-            .sort(sort_by("name", false, (a) => a.toUpperCase()))
-            .reverse();
+          list.sort(sort_by("name", false, (list) => list.toUpperCase())).reverse();
           break;
         case 2:
-          this.getPost.sort(sort_by("date", false, (a) => a.toUpperCase()));
+          list.sort(sort_by("date", false, (list) => list.toUpperCase()));
           break;
         case 3:
-          this.getPost
-            .sort(sort_by("date", false, (a) => a.toUpperCase()))
-            .reverse();
+          list.sort(sort_by("date", false, (list) => list.toUpperCase())).reverse();
           break;
       }
+      this.$store.commit("setFilteredList", list);
     },
     pagination() {
       this.getPost.slice(
@@ -156,8 +156,10 @@ export default {
         self.currentPage * self.perPage
       );
       this.$store.commit("setPaginationList", list);
+
       return this.$store.getters.getPaginationList;
     },
+
     totalRows() {
       return this.getPost.length;
     },
@@ -174,5 +176,6 @@ export default {
   border-color: #414141;
   color: black;
   font-style: normal;
+  text-transform: none;
 }
 </style>

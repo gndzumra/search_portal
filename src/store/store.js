@@ -25,7 +25,7 @@ export const store = new Vuex.Store({
         },
         getPaginationList(state) {
             return state.paginationList;
-        },
+        }
     },
     mutations: {
         setFilteredList: (state, list) => {
@@ -39,7 +39,7 @@ export const store = new Vuex.Store({
         },
         setPaginationList(state, data) {
             state.paginationList = data;
-        },
+        }
     },
     actions: {
         getJsonData: ({ commit }) => {
@@ -47,14 +47,14 @@ export const store = new Vuex.Store({
             axios.get("mockData.json").then((response) => {
                 const list = response.data.data;
                 for (let i = 0; i < list.length; i++) {
-                    const x = list[i];
+                    const item = list[i];
                     data.push({
-                        name: x[0],
-                        company: x[1],
-                        email: x[2],
-                        date: x[3],
-                        country: x[4],
-                        city: x[5],
+                        name: item[0],
+                        company: item[1],
+                        email: item[2],
+                        date: item[3],
+                        country: item[4],
+                        city: item[5],
                     });
                     commit('setJsonData', data)
                 }
