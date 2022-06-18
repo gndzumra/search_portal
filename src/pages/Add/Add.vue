@@ -145,8 +145,6 @@ export default {
 
 <style>
 .v-text-field {
-  border-radius: 15px;
-  margin: 2% 2%;
-  font-family: sans-serif;
+font-style: normal !important;
 }
 </style>
