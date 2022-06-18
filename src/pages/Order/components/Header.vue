@@ -35,10 +35,7 @@
               class="white--text v-size--default"
               x-large
               @click="getData()"
-              style="
-                text-transform: none;
-                border-radius: 12px;
-              "
+              style="text-transform: none; border-radius: 12px"
             >
               Search
             </v-btn>
@@ -84,7 +81,6 @@ export default {
           return customer;
       });
 
-      // console.log(this.postList)
       this.$store.commit("setFilteredList", this.postList);
     },
     back() {

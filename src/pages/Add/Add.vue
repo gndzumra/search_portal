@@ -117,6 +117,7 @@ export default {
       country: "",
       city: "",
       email: "",
+      searchString: "",
     };
   },
   validations: {
@@ -138,13 +139,17 @@ export default {
       this.$router.push({
         path: "/list",
       });
+      this.$store.commit("setSearchString", this.searchString);
     },
+  },
+  created() {
+    this.searchString = this.$store.getters.getSearchString;
   },
 };
 </script>
 
 <style>
 .v-text-field {
-font-style: normal !important;
+  font-style: normal !important;
 }
 </style>

@@ -100,6 +100,7 @@ export default {
       this.$router.push({
         path: "/add",
       });
+      this.$store.commit("setSearchString", this.searchString);
     },
     order(value) {
       const sort_by = (field, reverse, primer) => {
@@ -160,6 +161,9 @@ export default {
     totalRows() {
       return this.getPost.length;
     },
+  },
+  created() {
+    this.searchString = this.$store.getters.getSearchString;
   },
 };
 </script>
